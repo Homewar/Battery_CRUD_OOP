@@ -23,9 +23,9 @@ class Auth {
         }
     }
 
-    public function login($email, $password) {
-        $this->user->email = $email;
-        $this->user->password = $password;
+    public function login($username, $password) {
+        $this->user->login = $username;
+        $this->user->salt_password = $password;
 
         if ($this->user->login()) {
             session_start();
