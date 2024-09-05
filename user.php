@@ -4,9 +4,8 @@ class User {
     private $table_name = "users";
 
     public $id;
-    public $username;
-    public $email;
-    public $password;
+    public $login;
+    public $salt_password;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -14,39 +13,36 @@ class User {
 
     // Регистрация пользователя
     public function register() {
-        $query = "INSERT INTO " . $this->table_name . " (username, email, password) VALUES (:username, :email, :password)";
+        $query = "INSERT INTO " . $this->table_name . " (login, salt_salt_password) VALUES (:login,:salt_salt_password)";
         $stmt = $this->conn->prepare($query);
 
         // Хешируем пароль
-        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        $this->salt_password = password_hash($this->salt_password, PASSWORD_DEFAULT);
 
         // Связываем параметры
-        $stmt->bindParam(':username', $this->username);
-        $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':password', $this->password);
+        $stmt->bindParam(':login', $this->login);
+        $stmt->bindParam(':salt_salt_password', $this->salt_password);
 
         if ($stmt->execute()) {
             return true;
         }
-
         return false;
     }
 
     // Авторизация пользователя
     public function login() {
-        $query = "SELECT id, password FROM " . $this->table_name . " WHERE email = :email";
+        $query = "SELECT id, salt_password FROM " . $this->table_name . " WHERE login = :login";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':login', $this->login);
         $stmt->execute();
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Проверяем пароль
-        if ($user && password_verify($this->password, $user['password'])) {
+        if ($user && password_verify($this->salt_password, $user['salt_password'])) {
             $this->id = $user['id'];
             return true;
         }
-
         return false;
     }
 }
