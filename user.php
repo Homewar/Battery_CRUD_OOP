@@ -13,7 +13,7 @@ class User {
 
     // Регистрация пользователя
     public function register() {
-        $query = "INSERT INTO " . $this->table_name . " (login, salt_salt_password) VALUES (:login,:salt_salt_password)";
+        $query = "INSERT INTO " . $this->table_name . " (login, salt_password) VALUES (:login,:salt_password)";
         $stmt = $this->conn->prepare($query);
 
         // Хешируем пароль
@@ -21,7 +21,7 @@ class User {
 
         // Связываем параметры
         $stmt->bindParam(':login', $this->login);
-        $stmt->bindParam(':salt_salt_password', $this->salt_password);
+        $stmt->bindParam(':salt_password', $this->salt_password);
 
         if ($stmt->execute()) {
             return true;
