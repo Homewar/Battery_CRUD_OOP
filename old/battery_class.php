@@ -13,7 +13,6 @@ class Battery{
     public $BMS;
 
     public $columns;
-    public $rows;
 
     //функция конструктора
     public function __construct($db){
