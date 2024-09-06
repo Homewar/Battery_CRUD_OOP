@@ -1,8 +1,7 @@
 <?php
 require_once 'Database.php';
-require_once 'User.php';
-require_once 'Auth.php';
-require_once 'Battery.php'
+require_once 'user_controller.php';
+require_once 'authorization_class.php';
 
 $database = new Database();
 $db = $database->getConnection();
