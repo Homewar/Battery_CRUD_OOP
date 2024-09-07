@@ -31,6 +31,20 @@ Class batteryModels{
         }
         return $columns;
     }
+
+    function create(){
+        $query = "INSERT INTO".$this->table_name."model_id, battery_id, model_name, production_start, production_end VALUES :model_id, :battery_id, :model_name, :production_start, :production_end";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':model_id', $this->model_id);
+        $stmt->bindParam(':battery_id', $this->battery_id);
+        $stmt->bindParam(':model_name', $this->model_name);
+        $stmt->bindParam(':production_start', $this->production_start);
+        $stmt->bindParam(':production_end', $this->production_end);
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
 }
 
 ?>

@@ -3,7 +3,7 @@ $table = isset($_GET['table']) ? $_GET['table'] : '';
 
 switch($table){
     case 'BatteryModels':
-        include 'batteryModelsController.php';
+        include '../Controllers/batteryModelsController.php';
         break;
     case 'users':
         $stmt = $pdo->prepare("SELECT * FROM users");

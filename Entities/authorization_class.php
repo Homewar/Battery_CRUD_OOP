@@ -14,7 +14,7 @@ class Auth {
 
         if ($this->user->register()) {
             echo "Регистрация прошла успешно!";
-            header('Location: http://localhost/Battery_CRUD_OOP/login.html');
+            header('Location: http://localhost/Battery_CRUD_OOP/Front/login.html');
         } else {
             echo "Ошибка регистрации.";
         }
@@ -28,7 +28,7 @@ class Auth {
             session_start();
             $_SESSION['user_id'] = $this->user->id;
             echo "Авторизация успешна!";
-            header('Location: http://localhost/Battery_CRUD_OOP/table_route.php?table=BatteryModels');
+            header('Location: http://localhost/Battery_CRUD_OOP/Routing/table_route.php?table=BatteryModels');
         } 
         else 
         {
