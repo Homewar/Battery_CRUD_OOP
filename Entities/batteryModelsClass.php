@@ -15,14 +15,14 @@ Class batteryModels{
         $this->conn = $db;
     }
 
-    public function read(){
-    $sql = "SELECT model_id,battery_id,model_name,production_start,production_end FROM".$this->table_name.
-    $stmt = $this->conn->prepare($query);
-    $stmt->execute();
-    return $stmt;
+    function read(){
+        $query = "SELECT model_id, battery_id, model_name, production_start, production_end FROM ".$this->table_name;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
     }
 
-    public function get_column_name(){
+    function get_column_name(){
         $sql_columns = "SHOW COLUMNS FROM " . $this->table_name;
         $columns_result = $this->conn->query($sql_columns);
         $columns = [];

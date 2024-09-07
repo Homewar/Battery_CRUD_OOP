@@ -2,8 +2,8 @@
 $table = isset($_GET['table']) ? $_GET['table'] : '';
 
 switch($table){
-    case 'product':
-        include 'battery_controller.php';
+    case 'BatteryModels':
+        include 'batteryModelsController.php';
         break;
     case 'users':
         $stmt = $pdo->prepare("SELECT * FROM users");
