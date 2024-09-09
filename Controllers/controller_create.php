@@ -1,6 +1,6 @@
 <?php
 include_once '../database.php';
-include_once '../Entities/universal_class.php';
+include_once '../Entities/table_class.php';
 
 $table_name = isset($_GET['table']) ? $_GET['table'] : '';
 
