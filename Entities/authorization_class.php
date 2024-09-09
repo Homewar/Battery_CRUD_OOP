@@ -28,7 +28,7 @@ class Auth {
             session_start();
             $_SESSION['user_id'] = $this->user->id;
             echo "Авторизация успешна!";
-            header('Location: http://localhost/Battery_CRUD_OOP/Routing/table_route.php?table=BatteryModels');
+            header('Location: http://localhost/Battery_CRUD_OOP/Routing/universe_route.php?table=batteryModels&action=read');
         } 
         else 
         {
