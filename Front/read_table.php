@@ -65,14 +65,25 @@ if (!isset($_SESSION['user_id'])) {
                     foreach ($data_result as $row) {
                         echo "<tr>";
                         foreach ($columns as $column) {
-                            echo "<td>" . htmlspecialchars($row[$column]) . "</td>";
+                            $is_foreign_key = false;
+                            foreach ($primaryKey as $key) {
+                                if ($key['column_name'] == $column && $key['referenced_table_name'] != null) {
+                                    $referenced_table = $key['referenced_table_name'];
+                                    $referenced_value = htmlspecialchars($row[$column]);
+                                    echo "<td><a href='universe_route.php?action=read&table=$referenced_table'>$referenced_value</a></td>";
+                                    $is_foreign_key = true;
+                                    break;
+                                }
+                            }
+                            if (!$is_foreign_key) {
+                                echo "<td>" . htmlspecialchars($row[$column]) . "</td>";
+                            }
                         }
-                        // Добавление кнопок для действий (редактировать/удалить)
                         echo "<td class='action-buttons'>
                         <a href='../Routing/universe_route.php?table=" . urlencode($table_name) . "&action=update&id=" . urlencode($row[$column_id]) . "' class='btn btn-warning'>Edit</a>
                         <a href='../Routing/universe_route.php?table=" . urlencode($table_name) . "&action=delete&id=" . urlencode($row[$column_id]) . "' class='btn btn-danger'>Delete</a>
-                        </td>";
-                        echo "</tr>";         
+                      </td>";
+                        echo "</tr>";
                     }
                 } else {
                     echo "<tr><td colspan='" . (count($columns) + 1) . "'>No records found.</td></tr>";
