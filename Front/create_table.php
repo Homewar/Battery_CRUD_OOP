@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container" style="margin-top: 50px;"> <!-- Добавлен отступ сверху -->
-        <h2 style="background-color: #469597; padding: 20px; border-radius: 10px; text-align: left;"> <!-- Обрамление заголовка -->
+        <h2 style="background-color: #469597; padding: 20px; border-radius: 10px; text-align: left; "> <!-- Обрамление заголовка -->
         <p style="color: white;">Create New In Table: <?php echo htmlspecialchars($table_name); ?></p>
         </h2>
 
@@ -21,8 +21,8 @@
         <form action="../Controllers/controller_create.php?table=<?php echo urlencode($table_name); ?>" method="POST">
             <?php foreach ($columns as $column): ?>
                 <?php if ($column['Field'] !== $column_id): // исключаем поле id, если оно автогенерируемое ?>
-                    <div class="form-group">
-                        <label style="background-color: #5BA199; padding: 0 px; border-radius: 5px; text-align: left;" for="<?php echo htmlspecialchars($column['Field']); ?>"><p style="color: white;margin-top:5px;"><?php echo htmlspecialchars($column['Field']); ?></p></label>
+                    <div class="form-group" style="font-size: large;">
+                        <label style="padding: 0 px; text-align: left;" for="<?php echo htmlspecialchars($column['Field']); ?>"><p style="color: #37745B;margin-top:5px;"><?php echo htmlspecialchars($column['Field']); ?></p></label>
                         
                         <?php
                         // Генерируем разные типы input в зависимости от типа данных столбца
