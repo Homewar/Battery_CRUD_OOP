@@ -7,8 +7,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <h2>Edit Record in Table: <?php echo htmlspecialchars($table_name); ?></h2>
+    <div class="container" style="margin-top: 50px;">
+        <h2 style="background-color: #469597; padding: 20px; border-radius: 10px; text-align: left;">
+            <p style="color: white;">Edit Record in Table: <?php echo htmlspecialchars($table_name); ?></p>
+        </h2>
 
         <!-- Если есть ошибка, выводим сообщение об ошибке -->
         <?php if (isset($error)): ?>
@@ -19,8 +21,8 @@
         <form action="../Controllers/controller_edit.php?table=<?php echo urlencode($table_name); ?>&id=<?php echo urlencode($id); ?>" method="POST">
             <?php foreach ($columns as $column): ?>
                 <?php if ($column['Field'] !== $column_id): // исключаем поле id, если оно автогенерируемое ?>
-                    <div class="form-group">
-                        <label for="<?php echo htmlspecialchars($column['Field']); ?>"><?php echo htmlspecialchars($column['Field']); ?></label>
+                    <div class="form-group" style="font-size: large;">
+                        <label style="padding: 0 px; text-align: left;" for="<?php echo htmlspecialchars($column['Field']); ?>"><p style="color: #37745B;margin-top:5px;"><?php echo htmlspecialchars($column['Field']); ?></p></label>
                         
                         <?php
                         // Генерируем разные типы input в зависимости от типа данных столбца

@@ -110,6 +110,38 @@ class Universe_class {
         }
         return null; // если не найдено, вернется null
     }
+
+    public function getAllPrimaryKeyColumns() {
+        $sql = "
+            SELECT CONSTRAINT_NAME, TABLE_NAME, COLUMN_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME 
+            FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE 
+            WHERE TABLE_NAME = :table AND REFERENCED_TABLE_NAME IS NOT NULL;
+        ";
+        
+        // Подготавливаем запрос для защиты от SQL-инъекций
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':table', $this->table, PDO::PARAM_STR);
+        $stmt->execute();
+    
+        // Получаем все строки результата
+        $columns = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        // Создаем массив для хранения ключей
+        $primaryKeys = [];
+    
+        // Проходим по каждой строке и добавляем данные в массив
+        foreach ($columns as $column) {
+            $primaryKeys[] = [
+                'constraint_name' => $column['CONSTRAINT_NAME'],
+                'table_name' => $column['TABLE_NAME'],
+                'column_name' => $column['COLUMN_NAME'],
+                'referenced_table_name' => $column['REFERENCED_TABLE_NAME'],
+                'referenced_column_name' => $column['REFERENCED_COLUMN_NAME']
+            ];
+        }
+    
+        return $primaryKeys;
+    }
 }
 
 ?>
