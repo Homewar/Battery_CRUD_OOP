@@ -14,6 +14,8 @@ $data_result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $query = $db->query("SHOW TABLES");
 $tables = $query->fetchAll(PDO::FETCH_COLUMN);
 
+$primaryKey = $universal->getAllprimaryKeyColumns();
+
 $column_id = $universal->getPrimaryKey();
 include '../Front/read_table.php';
 ?>
